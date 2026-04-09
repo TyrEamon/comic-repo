@@ -1,27 +1,17 @@
-# Source Manifests
+# Source Directory
 
-`sources/` is the local external-source directory for ImageMaster.
+This folder is the payload that ImageMaster syncs into the local user source directory.
 
-Current layers:
-- root `*.json`: manifests that ImageMaster can already wire into current built-in adapters/runtime
-- `miru/`: imported Miru manga catalog manifests for future adaptation
-- `scripts/`: local executable JS source files loaded by ImageMaster source runtime
+Current policy:
+- keep `index.json` empty until a source is verified usable
+- add only sources that are confirmed working after conversion/testing
+- do not keep bulk imported Miru manifests here by default
 
-What these manifests do now:
-- describe source name, language, capabilities, website, and origin metadata
-- optionally map a manifest to an existing ImageMaster adapter
-- optionally point to a local `script` file and run it through the ImageMaster JS source runtime
-- prepare the directory layout for a future remote source repository
+Folders:
+- `miru/`: optional staging area for raw or converted Miru manifests
+- `scripts/`: optional JS source scripts for ImageMaster external sources
 
-What they do not do yet:
-- execute Miru scripts directly without adaptation
-- provide full Miru compatibility
-- auto-install or auto-update themselves from a remote repo
-
-Recommended workflow:
-1. Keep working adapters in the root `sources/` directory.
-2. Keep imported catalogs in `sources/miru/`.
-3. When a Miru source is adapted for ImageMaster, either:
-   - promote it into the root source index, or
-   - wire the manifest to a new adapter/runtime and explicitly enable it.
-4. Prefer new external sources to be added as `manifest + script` so future source updates do not require new Go code.
+When adding a new source:
+1. put its manifest in `sources/` or `sources/miru/`
+2. put its runtime JS in `sources/scripts/` if needed
+3. add the manifest path into `sources/index.json`

@@ -1,35 +1,30 @@
-# ImageMaster Source Repo
+# ImageMaster External Source Repo
 
-这个仓库目录可以直接作为 `ImageMaster` 的外置源仓库使用。
+This repository is the clean external source repository for `ImageMaster`.
 
-当前结构：
+Current state:
+- the repo is intentionally kept minimal
+- no Miru-imported manga sources are enabled by default
+- only the directory structure and index format are kept
+
+Recommended workflow:
+1. Pick a Miru source that is confirmed usable.
+2. Convert or rewrite it into the ImageMaster source format.
+3. Add the new manifest and script into `sources/`.
+4. Update `sources/index.json`.
+5. Push changes, then sync the source repo from ImageMaster.
+
+Repository layout:
 
 ```text
 sources/
   index.json
-  *.json
   miru/
-    *.json
   scripts/
-    *.js
 ```
 
-导入方式：
-
-1. 把整个目录上传到 GitHub 仓库根目录。
-2. 在 `ImageMaster -> Setting -> 源仓库` 里填写：
-   - GitHub 仓库地址，例如 `https://github.com/your-name/your-repo`
-   - 或直接填写远程 `sources/index.json` 地址
-3. 点击“同步源仓库”。
-4. 软件会把源下载到本地用户源目录，然后点击“重载本地源”即可生效。
-
-说明：
-
-- `sources/index.json` 决定软件会同步哪些源。
-- `sources/scripts/*.js` 是真正可执行的外置源逻辑。
-- `sources/miru/` 目前保存的是从 Miru 漫画仓库转换过来的 manifest 素材，后续可以逐个适配成可运行源。
-- 当前已经具备实际运行能力的示例包括：
-  - `baozi`
-  - `jmcomic`
-  - `mangadex`
-  - `miru/com.dmzj.www.json` + `sources/scripts/dmzj.js`
+Notes:
+- `sources/index.json` controls which sources ImageMaster will import.
+- `sources/miru/` is reserved for future raw or converted Miru manifests.
+- `sources/scripts/` is reserved for future executable JS source scripts.
+- This repo is now a clean template so only verified sources are added later.
