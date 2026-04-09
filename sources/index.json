@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "sources": [
+    "baozi.json",
+    "jmcomic.json",
+    "mangadex.json",
+    "miru/com.dmzj.www.json"
+  ]
+}
